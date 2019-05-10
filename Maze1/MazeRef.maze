@@ -1,0 +1,108 @@
+//    //This is for maze one
+//    direction directions[][4] = {
+//        //Although it wouldn't matter what order the directtions are, the convention is to
+//        // do Donw, UP, LEFT, RIGHt
+//
+//        //height = 8
+//        {DOWN, NONE, NONE, NONE},
+//        {NONE, UP, NONE, RIGHT},
+//        {DOWN, NONE, NONE, NONE},
+//        {DOWN, UP, NONE, RIGHT},
+//        {DOWN, UP, NONE, NONE},
+//        {DOWN, UP, NONE, RIGHT},
+//        {NONE, UP, NONE, RIGHT},
+//        {DOWN, NONE, NONE, RIGHT},
+//        {DOWN, UP, NONE, NONE},
+//        {NONE, UP, NONE, RIGHT},
+//        //done
+//
+//        //height = 7
+//        {DOWN, NONE, NONE, RIGHT},
+//        {NONE, UP, LEFT, NONE},
+//        {NONE, NONE, NONE, RIGHT},
+//        {NONE, NONE, LEFT, RIGHT},
+//        {NONE, NONE, NONE, RIGHT},
+//        {NONE, NONE, LEFT, RIGHT},
+//        {NONE, NONE, LEFT, NONE},
+//        {NONE, NONE, LEFT, RIGHT},
+//        {NONE, NONE, NONE, RIGHT},
+//        {NONE, NONE, LEFT, RIGHT},
+//        //done
+//
+//        //height = 6
+//        {DOWN, NONE, LEFT, RIGHT},
+//        {DOWN, UP, NONE, NONE},
+//        {NONE, UP, NONE, NONE},
+//        {DOWN, NONE, LEFT, NONE},
+//        {NONE, UP, LEFT, RIGHT},
+//        {DOWN, NONE, LEFT, NONE},
+//        {DOWN, UP, NONE, NONE},
+//        {NONE, UP, LEFT, NONE},
+//        {NONE, NONE, LEFT, RIGHT},
+//        {NONE, NONE, LEFT, RIGHT},
+//        //done
+//
+//        //height = 5
+//        {NONE, NONE, LEFT, RIGHT},
+//        {NONE, NONE, NONE, RIGHT},
+//        {DOWN, NONE, NONE, RIGHT},
+//        {NONE, UP, NONE, RIGHT},
+//        {NONE, NONE, LEFT, RIGHT},
+//        {DOWN, NONE, NONE, RIGHT},
+//        {DOWN, NONE, NONE, NONE},
+//        {NONE, UP, NONE, RIGHT},
+//        {DOWN, NONE, LEFT, RIGHT},
+//        {NONE, UP, LEFT, RIGHT},
+//        //done
+//
+//        //height = 4
+//        {DOWN, NONE, LEFT, RIGHT},
+//        {NONE, UP, LEFT, RIGHT},
+//        {DOWN, NONE, LEFT, RIGHT},
+//        {NONE, UP, LEFT, RIGHT},
+//        {NONE, NONE, LEFT, NONE},
+//        {DOWN, NONE, LEFT, RIGHT},
+//        {NONE, UP, NONE, NONE},
+//        {NONE, NONE, LEFT, RIGHT},
+//        {NONE, NONE, LEFT, RIGHT},
+//        {NONE, NONE, LEFT, NONE},
+//        //done
+//
+//        //height = 3
+//        {DOWN, NONE, LEFT, RIGHT},
+//        {NONE, UP, LEFT, NONE},
+//        {DOWN, NONE, LEFT, RIGHT},
+//        {DOWN, UP, LEFT, RIGHT},
+//        {DOWN, UP, NONE, RIGHT},
+//        {DOWN, UP, LEFT, NONE},
+//        {DOWN, UP, NONE, NONE},
+//        {NONE, UP, LEFT, RIGHT},
+//        {DOWN, NONE, LEFT, NONE},
+//        {NONE, UP, NONE, RIGHT},
+//        //done
+//
+//        //height = 2
+//        {NONE, NONE, LEFT, RIGHT},
+//        {DOWN, NONE, NONE, RIGHT},
+//        {DOWN, UP, LEFT, RIGHT},
+//        {NONE, UP, LEFT, RIGHT},
+//        {DOWN, NONE, LEFT, NONE},
+//        {DOWN, UP, NONE, NONE},
+//        {NONE, UP, NONE, RIGHT},
+//        {NONE, NONE, LEFT, RIGHT},
+//        {NONE, NONE, NONE, RIGHT},
+//        {NONE, NONE, LEFT, RIGHT},
+//        //done
+//
+//        //height = 1
+//        {DOWN, NONE, LEFT, NONE},
+//        {DOWN, UP, DOWN, NONE},
+//        {NONE, UP, LEFT, NONE},
+//        {NONE, NONE, LEFT, NONE},
+//        {DOWN, NONE, NONE, NONE},
+//        {DOWN, UP, NONE, NONE},
+//        {NONE, UP, LEFT, NONE},
+//        {DOWN, NONE, LEFT, NONE},
+//        {DOWN, UP, LEFT, NONE},
+//        {NONE, UP, LEFT, NONE},
+//    };

@@ -1,0 +1,153 @@
+
+
+template <class Process, class Item, class SizeType>
+void depth_first(Process f, Process on_found, Graph<Item>& g, SizeType search, SizeType destination){
+    bool marked[g.MAXIMUM];
+    
+    //Check that start vertex is a valid vertex
+    assert( search < g.size() );
+    //Set all the componets of marked to false
+    for (bool& mark : marked) {
+        mark = false;
+    }
+    
+    
+    //call a seperate function to carry out the search
+    rec_dfs(f, on_found, g, search, destination, marked);
+}
+
+template <class Process, class Item, class SizeType>
+bool rec_dfs(Process f, Process on_found, Graph<Item>& g, SizeType v, SizeType destination, bool marked[]){
+    std::set<std::size_t> connections = g.neighbors(v);
+    std::set<std::size_t>::iterator it;
+    
+    marked[v] = true; // Mark vertex v.
+    if (g[v] == destination) {
+        f(g[v]);
+        //Set all the componets of marked to false
+        on_found(g[v]);
+        return true;
+    }
+    f(g[v]); // process the label of vertex v with the funciotn f.
+
+    // Traverse all the neighbors, looking for unmarked vertices:
+    for (it = connections.begin(); it != connections.end(); ++it) {
+        if(!marked[*it]){
+            bool is_found = rec_dfs(f, on_found, g, *it, destination, marked);
+            if (is_found) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+template <class Process, class Item, class SizeType>
+void breadth_first(Process f, Graph<Item>& g, SizeType v){
+    //Same as the depth first funciton, but using a breadth first search instead
+    bool marked[g.MAXIMUM];
+    std::set<std::size_t> connections = g.neighbors(v);
+    std::set<std::size_t>::iterator it;
+    std::queue<std::size_t> vertex_queue;
+    
+    assert(v < g.size());
+    
+    std::fill_n(marked, g.size(), false);
+    marked[v] = true; // Mark vertex v.
+    f(g[v]); // process the label of vertex v with the funciotn f.
+    
+    vertex_queue.push(v);
+    
+    do {
+        connections = g.neighbors(vertex_queue.front());
+        vertex_queue.pop();
+        //Mark the process the unmarked neighbors, and place them in the queue.
+        for (it = connections.begin(); it != connections.end(); ++it) {
+            if (!marked[*it]) {
+                marked[*it] = true;
+                f(g[*it]);
+                vertex_queue.push(*it);
+            }
+        }
+    } while (!vertex_queue.empty());
+}
+
+template <class Process, class Item, class SizeType>
+void shortest_route(Process f, Graph<Item>& g, SizeType start, SizeType end){
+    //set up a list of all the distances
+    int distance[g.size()];
+    int predecessor[g.size()];
+    bool marked[g.size()];
+    int vertex_on_path = INT_MAX;
+
+    for (int i = 1; i < g.size(); ++i) {
+        distance[i] = INT_MAX;
+        marked[i] = false;
+    }
+    distance[start] = 0;
+    //initialize a set of vertices called allowed verticies
+    std::set<size_t> allowed_vertices;
+    
+    assert(start < g.size());
+    //Step 3: loop
+    for (size_t allowed_size = 0; allowed_size < g.size()-1; ++allowed_size) {
+        //3a: determine the minimun distance
+        const int min = min_distance(distance, marked, g.size());
+        marked[min] = true;
+        //f(g[min]);
+        //3a.2 : This is only if we care about the shortest distance
+//        if (min == end && distance[min] != INT_MAX) {
+//            std::cout << "The minimun distance is " << distance[min] << std::endl;
+//            break;
+//        }
+        //3b: add the vetex "next" in other words, the vertex at mindex to the set allowed_verticies
+        allowed_vertices.insert(min);
+        
+        int sum = 0;
+        //3c: Revise the distance array using the vertices in the allowed_verticies
+        for (int v = 0; v < g.size(); ++v) {
+            if (allowed_vertices.find(v) == allowed_vertices.end() && g.is_edge(min, v)) {
+                sum = distance[min] + g.edge_at(min, v);
+                if (sum <= distance[v]) {
+                    distance[v] = sum;
+                    predecessor[v] = min;
+//                    marked[v] = true;
+                }
+            }
+        }
+    }
+    //Step 4: print all the values in the distance array
+    std::cout << "Values at the distance array : ";
+    for (auto x : distance) {
+        if (x < INT_MAX && x >= 0) {
+            std::cout << x << " ";
+        }
+    }
+    std::cout << std::endl << std::endl;
+    
+    
+    vertex_on_path = end;
+    if(vertex_on_path < 0 || vertex_on_path >= g.size()){
+        std::cout << "There is no possible path" << std::endl;
+        return;
+    }
+    std::cout << "The shortest distance : " << distance[vertex_on_path] << std::endl << std::endl << std::endl;
+    //Print the current shortest path in reverse order
+    std::cout <<"The shortest Path : " << vertex_on_path << " ";
+    while (vertex_on_path != start) {
+        vertex_on_path = predecessor[vertex_on_path];
+        std::cout << vertex_on_path << " ";
+    }
+}
+
+int min_distance(int dist[], bool marked[], int V){
+    int min = INT_MAX;
+    int min_dex = 0;
+    for (int i = 0; i < V; ++i) {
+        if(!marked[i] && dist[i] <= min && dist[i] > -1){
+            min = dist[i];
+            min_dex = i;
+        }
+    }
+    return min_dex;
+}
